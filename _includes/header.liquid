@@ -41,7 +41,7 @@
       </button>
 
       <div class="collapse navbar-collapse text-right" id="navbarNav">
-        <ul class="navbar-nav ml-auto flex-nowrap">
+        <ul class="navbar-nav ml-auto navbar-nav--wrap">
           {% for page in site.pages %}
             {% if page.permalink == '/' %} {% assign about_title = page.title %} {% endif %}
           {% endfor %}
@@ -117,14 +117,6 @@
               {% endif %}
             {% endif %}
           {% endfor %}
-          {% if site.search_enabled %}
-            <!-- Search -->
-            <li class="nav-item">
-              <button id="search-toggle" title="Search" onclick="openSearchModal()">
-                <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span>
-              </button>
-            </li>
-          {% endif %}
           {% if site.enable_darkmode %}
             <!-- Toogle theme mode -->
             <li class="toggle-container">

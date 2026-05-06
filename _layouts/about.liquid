@@ -1,16 +1,41 @@
 ---
 layout: default
 ---
-<div class="post">
+<div class="post{% if page.page_class %} {{ page.page_class }}{% endif %}">
   <header class="post-header">
-    <h1 class="post-title">
-      {% if site.title == 'blank' %}
-        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
-        {{ site.last_name }}
-      {% else %}
-        {{ site.title }}
+    <div class="post-header-name-row d-flex flex-wrap align-items-center">
+      <h1 class="post-title mb-0">
+        {% if site.title == 'blank' %}
+          <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+          {{ site.last_name }}
+        {% else %}
+          {{ site.title }}
+        {% endif %}
+      </h1>
+      {% if page.social %}
+        <div class="post-header-social contact-icons mt-1 mt-md-0">
+          {% social_links %}
+          {% assign _cv_url = page.cv_url | default: site.cv_url %}
+          {% if _cv_url %}
+            <a
+              href="{{ _cv_url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="CV (PDF)"
+              aria-label="CV PDF on Google Drive"
+            >
+              <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+              <span class="sr-only">CV (PDF)</span>
+            </a>
+          {% endif %}
+        </div>
       {% endif %}
-    </h1>
+    </div>
+    <p class="pronouns-pronunciation" style="font-size: 0.95rem; color: var(--global-text-color-light); margin-top: 0.5rem; margin-bottom: 1rem;">
+      <span style="font-style: italic;">he/him</span>
+      <span style="margin: 0 0.5rem;">•</span>
+      <span style="margin-left: 0.1rem; color: var(--global-text-color-light);">(muh-yuhnk)</span>
+    </p>
     <p class="desc">{{ page.subtitle }}</p>
   </header>
 
@@ -46,6 +71,9 @@ layout: default
         <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
       </h2>
       {% include news.liquid limit=true %}
+      <p class="mt-2">
+        <a href="{{ '/news/' | relative_url }}">click for more</a>
+      </p>
     {% endif %}
 
     <!-- Latest posts -->
@@ -64,11 +92,9 @@ layout: default
       {% include selected_papers.liquid %}
     {% endif %}
 
-    <!-- Social -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% social_links %}</div>
-
+    <!-- Contact note (icons are next to name in header); omit block if contact_note unset -->
+    {% if page.social and site.contact_note %}
+      <div class="social social-contact-note-only">
         <div class="contact-note">{{ site.contact_note }}</div>
       </div>
     {% endif %}

@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2026-04-15
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+ConvoLearn dataset (40K turns, post-training data for dialogic alignment of LLM tutors) released on [Hugging Face](https://huggingface.co/datasets/masharma/convolearn) :sparkles:

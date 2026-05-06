@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Use Homebrew Ruby (not macOS system Ruby 2.x) so Bundler 4 + Gemfile.lock work.
+set -e
+cd "$(dirname "$0")/.." || exit 1
+echo "Jekyll site root: $(pwd)"
+echo ""
+echo "When the server is ready, open:"
+echo "  http://127.0.0.1:4000/                      (home)"
+echo "  http://127.0.0.1:4000/data-science-design/  (infographics gallery)"
+echo "  http://127.0.0.1:4000/infographics/         (redirects to gallery)"
+echo ""
+echo "If you see the WRONG site on port 4000, stop it:  lsof -i :4000  then  kill <PID>"
+echo ""
+for prefix in /opt/homebrew/opt/ruby /usr/local/opt/ruby; do
+  if [[ -d "$prefix/bin" ]]; then
+    export PATH="$prefix/bin:$PATH"
+    break
+  fi
+done
+
+if ! ruby -e 'exit(RUBY_VERSION.split(".")[0].to_i >= 3 ? 0 : 1)' 2>/dev/null; then
+  echo "Ruby 3.x is required (your \`ruby\` is $(command -v ruby 2>/dev/null || echo missing))."
+  echo "Install:  brew install ruby"
+  echo "Then run:  gem install bundler:4.0.9 && bundle install"
+  echo "Then run:  npm run serve"
+  exit 1
+fi
+
+exec bundle exec jekyll serve --livereload -P 4000 -H 127.0.0.1 "$@"

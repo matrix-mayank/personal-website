@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+cd "$(dirname "$0")/.." || exit 1
+for prefix in /opt/homebrew/opt/ruby /usr/local/opt/ruby; do
+  if [[ -d "$prefix/bin" ]]; then
+    export PATH="$prefix/bin:$PATH"
+    break
+  fi
+done
+
+if ! ruby -e 'exit(RUBY_VERSION.split(".")[0].to_i >= 3 ? 0 : 1)' 2>/dev/null; then
+  echo "Ruby 3.x is required. Install: brew install ruby"
+  exit 1
+fi
+
+exec bundle exec jekyll build "$@"

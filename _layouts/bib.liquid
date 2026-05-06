@@ -187,76 +187,85 @@
       {{ entry.note | strip }}
     </div>
 
-    <!-- Links/Buttons -->
+    <!-- Links: single primary "Link" (PDF preferred, then HTML, DOI, arXiv, …) — no separate Abs/PDF/HTML row -->
+    {% assign pub_link = '' %}
+    {% if entry.pdf != blank %}
+      {% if entry.pdf contains '://' %}
+        {% assign pub_link = entry.pdf %}
+      {% else %}
+        {% capture pub_link %}{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}{% endcapture %}
+      {% endif %}
+    {% endif %}
+    {% if pub_link == blank and entry.html != blank %}
+      {% if entry.html contains '://' %}
+        {% assign pub_link = entry.html %}
+      {% else %}
+        {% capture pub_link %}{{ entry.html | prepend: '/assets/html/' | relative_url }}{% endcapture %}
+      {% endif %}
+    {% endif %}
+    {% if pub_link == blank and entry.doi != blank %}
+      {% capture pub_link %}https://doi.org/{{ entry.doi }}{% endcapture %}
+    {% endif %}
+    {% if pub_link == blank and entry.arxiv != blank %}
+      {% capture pub_link %}https://arxiv.org/abs/{{ entry.arxiv }}{% endcapture %}
+    {% endif %}
+    {% if pub_link == blank and entry.hal != blank %}
+      {% capture pub_link %}https://hal.science/{{ entry.hal }}{% endcapture %}
+    {% endif %}
+    {% if pub_link == blank and entry.website != blank %}
+      {% assign pub_link = entry.website %}
+    {% endif %}
+    {% if pub_link == blank and entry.code != blank %}
+      {% assign pub_link = entry.code %}
+    {% endif %}
+    {% if pub_link == blank and entry.blog != blank %}
+      {% assign pub_link = entry.blog %}
+    {% endif %}
+    {% if pub_link == blank and entry.video != blank and site.enable_video_embedding != true %}
+      {% assign pub_link = entry.video %}
+    {% endif %}
+    {% if pub_link == blank and entry.supp != blank %}
+      {% if entry.supp contains '://' %}
+        {% assign pub_link = entry.supp %}
+      {% else %}
+        {% capture pub_link %}{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}{% endcapture %}
+      {% endif %}
+    {% endif %}
+    {% if pub_link == blank and entry.poster != blank %}
+      {% if entry.poster contains '://' %}
+        {% assign pub_link = entry.poster %}
+      {% else %}
+        {% capture pub_link %}{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}{% endcapture %}
+      {% endif %}
+    {% endif %}
+    {% if pub_link == blank and entry.slides != blank %}
+      {% if entry.slides contains '://' %}
+        {% assign pub_link = entry.slides %}
+      {% else %}
+        {% capture pub_link %}{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}{% endcapture %}
+      {% endif %}
+    {% endif %}
+
     <div class="links">
       {% if entry.award %}
         <a class="award btn btn-sm z-depth-0" role="button">
           {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awarded{% endif -%}
         </a>
       {% endif %}
-      {% if entry.abstract %}
-        <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
-      {% endif %}
-      {% if entry.doi %}
-        <a href="https://doi.org/{{ entry.doi }}" class="btn btn-sm z-depth-0" role="button">DOI</a>
-      {% endif %}
-      {% if entry.arxiv %}
-        <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
-      {% endif %}
-      {% if entry.hal %}
-        <a href="https://hal.science/{{ entry.hal }}" class="btn btn-sm z-depth-0" role="button">HAL</a>
+      {% if pub_link != blank %}
+        <a
+          href="{{ pub_link }}"
+          class="btn btn-sm z-depth-0"
+          role="button"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Link</a>
       {% endif %}
       {% if entry.bibtex_show %}
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
-      {% if entry.html %}
-        {% if entry.html contains '://' %}
-          <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
-        {% else %}
-          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
-        {% endif %}
-      {% endif %}
-      {% if entry.pdf %}
-        {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-        {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-        {% endif %}
-      {% endif %}
-      {% if entry.supp %}
-        {% if entry.supp contains '://' %}
-          <a href="{{ entry.supp }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-        {% else %}
-          <a href="{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-        {% endif %}
-      {% endif %}
       {% if entry.video and site.enable_video_embedding %}
         <a class="abstract btn btn-sm z-depth-0" role="button">Video</a>
-      {% elsif entry.video %}
-        <a href="{{ entry.video }}" class="btn btn-sm z-depth-0" role="button">Video</a>
-      {% endif %}
-      {% if entry.blog %}
-        <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
-      {% endif %}
-      {% if entry.code %}
-        <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
-      {% endif %}
-      {% if entry.poster %}
-        {% if entry.poster contains '://' %}
-          <a href="{{ entry.poster }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-        {% else %}
-          <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-        {% endif %}
-      {% endif %}
-      {% if entry.slides %}
-        {% if entry.slides contains '://' %}
-          <a href="{{ entry.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-        {% else %}
-          <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-        {% endif %}
-      {% endif %}
-      {% if entry.website %}
-        <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
       {% endif %}
     </div>
     {% if site.enable_publication_badges %}

@@ -43,6 +43,13 @@
         display: inline-block;
       }
 
+      img.preview,
+      .abbr figure.preview img {
+        border: 1px solid #9f1239;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+
       .abbr {
         margin-bottom: 0.5rem;
 
@@ -185,4 +192,178 @@
 .citation,
 .citation-number {
   color: var(--global-theme-color);
+}
+
+/* Themed /publications/ — minimal list (title / authors / venue / ABS ghost button) */
+.post.page-publications-themed article .publications-themed-list {
+  max-width: 52rem;
+}
+
+.post.page-publications-themed article .pub-theme {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--global-divider-color);
+
+  &:first-child {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+  }
+}
+
+.post.page-publications-themed article .pub-theme-h {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: var(--global-text-color);
+}
+
+.post.page-publications-themed article .pub-theme-lead {
+  margin: 0 0 1.75rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--global-text-color-light);
+}
+
+.post.page-publications-themed article .pub-entry {
+  margin: 0 0 2.25rem;
+  text-align: left;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.post.page-publications-themed article .pub-entry--has-thumb {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem 1.35rem;
+}
+
+.post.page-publications-themed article .pub-entry-thumb {
+  flex: 0 0 7.5rem;
+  width: 7.5rem;
+  max-width: 35%;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #9f1239;
+    background: var(--global-bg-color);
+    box-sizing: border-box;
+  }
+}
+
+.post.page-publications-themed article .pub-entry-body {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 576px) {
+  .post.page-publications-themed article .pub-entry--has-thumb {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .post.page-publications-themed article .pub-entry-thumb {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 11rem;
+  }
+}
+
+.post.page-publications-themed article .pub-entry-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--global-text-color);
+}
+
+.post.page-publications-themed article .pub-entry-authors {
+  margin: 0.55rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--global-text-color);
+}
+
+.post.page-publications-themed article .pub-entry-me {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: currentColor;
+}
+
+.post.page-publications-themed article .pub-entry-venue {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--global-text-color-light);
+
+  em {
+    font-style: italic;
+  }
+}
+
+.post.page-publications-themed article .pub-entry-actions {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.post.page-publications-themed article .pub-btn-ghost {
+  display: inline-block;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--global-text-color);
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  line-height: 1.2;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.85;
+    text-decoration: none;
+    color: var(--global-theme-color);
+    border-color: var(--global-theme-color);
+  }
+}
+
+.post.page-publications-themed article .pub-btn-ghost--disabled {
+  cursor: default;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .publications ol.bibliography li img.preview,
+html[data-theme="dark"] .publications ol.bibliography li .abbr figure img {
+  border-color: #db2777;
+}
+
+html[data-theme="dark"] .post.page-publications-themed article .pub-entry-thumb img {
+  border-color: #db2777;
 }
