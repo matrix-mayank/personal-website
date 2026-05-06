@@ -8,8 +8,7 @@ middle_name:
 last_name: Sharma
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Personal website of Mayank Sharma, Graduate Researcher at Stanford HAI focusing on AI evaluation, human data annotation, and measurement systems.
-footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+footer_text:
 keywords: AI evaluation, human data annotation, psychometrics, IRT, educational data science, Stanford # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 # Favicon: file in /assets/img/ (cache-busted). Emoji-only favicons are sticky in Chrome.
