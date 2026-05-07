@@ -200,8 +200,8 @@
 }
 
 .post.page-publications-themed article .pub-theme {
-  padding-top: 2rem;
-  margin-top: 2rem;
+  padding-top: 1.15rem;
+  margin-top: 1.15rem;
   border-top: 1px solid var(--global-divider-color);
 
   &:first-child {
@@ -212,11 +212,11 @@
 }
 
 .post.page-publications-themed article .pub-theme-h {
-  margin: 0 0 0.35rem;
-  font-size: 1.15rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--global-text-color);
 }
 
@@ -228,7 +228,7 @@
 }
 
 .post.page-publications-themed article .pub-entry {
-  margin: 0 0 2.25rem;
+  margin: 0 0 0.65rem;
   text-align: left;
   font-family:
     system-ui,
@@ -270,9 +270,26 @@
 .post.page-publications-themed article .pub-entry-body {
   flex: 1;
   min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 0.65rem;
+  row-gap: 0.12rem;
+  align-items: baseline;
 }
 
 @media (max-width: 576px) {
+  .post.page-publications-themed article .pub-entry-body {
+    grid-template-columns: 1fr;
+  }
+
+  .post.page-publications-themed article .pub-entry-actions {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    margin-top: 0.35rem;
+    justify-content: flex-start;
+  }
+
   .post.page-publications-themed article .pub-entry--has-thumb {
     flex-direction: column;
     align-items: stretch;
@@ -286,19 +303,21 @@
 }
 
 .post.page-publications-themed article .pub-entry-title {
+  grid-column: 1 / -1;
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.3;
   letter-spacing: -0.02em;
   color: var(--global-text-color);
 }
 
 .post.page-publications-themed article .pub-entry-authors {
-  margin: 0.55rem 0 0;
-  font-size: 0.95rem;
+  grid-column: 1 / -1;
+  margin: 0.28rem 0 0;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.42;
   color: var(--global-text-color);
 }
 
@@ -310,9 +329,10 @@
 }
 
 .post.page-publications-themed article .pub-entry-venue {
-  margin: 0.35rem 0 0;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  grid-column: 1;
+  margin: 0.12rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.42;
   color: var(--global-text-color-light);
 
   em {
@@ -321,10 +341,14 @@
 }
 
 .post.page-publications-themed article .pub-entry-actions {
-  margin-top: 0.9rem;
+  grid-column: 2;
+  grid-row: 3;
+  margin: 0.12rem 0 0;
+  justify-self: end;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.35rem;
+  justify-content: flex-end;
 }
 
 .post.page-publications-themed article .pub-btn-ghost {

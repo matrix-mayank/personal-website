@@ -172,6 +172,13 @@ html[data-theme="dark"] .post.page-about-home .post-header {
   border-bottom: none;
 }
 
+/* Publications — less vertical chrome and animation lag */
+.post.page-publications-themed .post-header {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.65rem;
+  animation: none;
+}
+
 /* Pronunciation row spacing (full-width rule is on .post-header) */
 .post-header .pronouns-pronunciation {
   padding-bottom: 0;
