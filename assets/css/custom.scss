@@ -1181,17 +1181,19 @@ html[data-theme='dark'] .post.page-awards article .award-tile .award-meta {
   color: #4a4a4a;
 }
 
-/* === Data science × design (infographics) — vertical gallery + click to zoom === */
-/* Keep `description` in front matter for meta tags; hide duplicate subtitle under H1 */
+/* === Data science × design — intro stays readable; gallery breaks out to near-full viewport === */
 .post.page-ds-design .post-header .post-description {
   display: none;
 }
 
 .post.page-ds-design article {
+  overflow-x: clip;
+
   > p:first-of-type {
+    max-width: 42rem;
     font-size: 1.05rem;
     line-height: 1.65;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.35rem;
     color: var(--global-text-color-light);
 
     a {
@@ -1200,70 +1202,124 @@ html[data-theme='dark'] .post.page-awards article .award-tile .award-meta {
   }
 }
 
-.post.page-ds-design article {
-  .infographic-strip--vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.25rem;
-    overflow: visible;
-    padding: 0.75rem 0 1.5rem;
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-    max-width: 52rem;
-    margin-inline: auto;
-  }
+/* Edge-to-edge band relative to viewport (escapes narrow `.container` / site max-width) */
+.post.page-ds-design .ds-design-gallery-breakout {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 1rem 0 2.5rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--global-divider-color) 28%, transparent) 0%,
+    transparent 12%
+  );
+  border-top: 1px solid color-mix(in srgb, var(--global-divider-color) 45%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--global-divider-color) 45%, transparent);
+}
 
-  .infographic-strip-item {
-    flex: none;
-    width: 100%;
-    max-width: 52rem;
-    text-align: center;
+.post.page-ds-design .ds-design-gallery-inner {
+  width: 100%;
+  max-width: min(1320px, 100%);
+  margin: 0 auto;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  box-sizing: border-box;
+}
 
-    figure {
-      margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--global-divider-color);
-      background: rgba(0, 0, 0, 0.02);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
+.post.page-ds-design .ds-design-gallery-group {
+  margin-top: 1.75rem;
 
-    figure:hover {
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
-      transform: translateY(-4px);
-    }
-
-    picture,
-    img {
-      display: block;
-    }
-
-    img[data-zoomable],
-    img.infographic-thumb {
-      cursor: zoom-in;
-      width: 100%;
-      height: auto;
-      max-height: none;
-      object-fit: contain;
-    }
-  }
-
-  .infographic-strip-label {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.35;
-    margin-top: 0.65rem;
-    color: var(--global-text-color-light);
-    max-width: none;
-    margin-left: auto;
-    margin-right: auto;
+  &:first-child {
+    margin-top: 0;
   }
 }
 
-html[data-theme="dark"] .post.page-ds-design .infographic-strip-item figure {
+.post.page-ds-design .ds-design-gallery-group-title {
+  margin: 0 0 0.85rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--global-text-color-light);
+}
+
+.post.page-ds-design .ds-design-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem 1.1rem;
+}
+
+/* One-offs (UNICEF, UNV): full-width band but cap poster width so they stay legible */
+.post.page-ds-design .ds-design-gallery-grid:not(.ds-design-gallery-grid--dense) {
+  max-width: min(960px, 100%);
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .post.page-ds-design .ds-design-gallery-grid--dense {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .post.page-ds-design .ds-design-gallery-grid--dense {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.post.page-ds-design .ds-design-gallery-item {
+  text-align: center;
+  min-width: 0;
+
+  figure {
+    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--global-divider-color);
+    background: rgba(0, 0, 0, 0.02);
+    transition:
+      box-shadow 0.28s ease,
+      transform 0.28s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  figure:hover {
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+  }
+
+  picture,
+  img {
+    display: block;
+  }
+
+  img[data-zoomable],
+  img.infographic-thumb {
+    cursor: zoom-in;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    vertical-align: middle;
+  }
+}
+
+html[data-theme="dark"] .post.page-ds-design .ds-design-gallery-breakout {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 14%
+  );
+  border-top-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] .post.page-ds-design .ds-design-gallery-item figure {
   border-color: rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.03);
 }
