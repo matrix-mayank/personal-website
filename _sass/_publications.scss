@@ -270,12 +270,29 @@
 .post.page-publications-themed article .pub-entry-body {
   flex: 1;
   min-width: 0;
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title actions"
+    "authors authors"
+    "venue venue";
+  column-gap: 0.6rem;
+  row-gap: 0.12rem;
+  align-items: start;
 }
 
 @media (max-width: 576px) {
   .post.page-publications-themed article .pub-entry-actions {
-    margin-left: 0.32rem;
+    margin: 0.3rem 0 0;
+  }
+
+  .post.page-publications-themed article .pub-entry-body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "actions"
+      "authors"
+      "venue";
   }
 
   .post.page-publications-themed article .pub-entry--has-thumb {
@@ -291,6 +308,7 @@
 }
 
 .post.page-publications-themed article .pub-entry-title {
+  grid-area: title;
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
@@ -300,6 +318,7 @@
 }
 
 .post.page-publications-themed article .pub-entry-authors {
+  grid-area: authors;
   margin: 0.28rem 0 0;
   font-size: 0.9rem;
   font-weight: 400;
@@ -315,7 +334,8 @@
 }
 
 .post.page-publications-themed article .pub-entry-venue {
-  display: inline;
+  grid-area: venue;
+  display: block;
   margin: 0;
   font-size: 0.875rem;
   line-height: 1.42;
@@ -327,11 +347,13 @@
 }
 
 .post.page-publications-themed article .pub-entry-actions {
+  grid-area: actions;
+  justify-self: end;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.35rem;
-  margin: 0 0 0 0.35rem;
+  margin: 0;
   vertical-align: baseline;
 }
 
