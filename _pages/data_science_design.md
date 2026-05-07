@@ -33,27 +33,65 @@ Select infographics and visual communication projects for international organiza
 
     <section class="ds-design-gallery-group">
       <h3 class="ds-design-gallery-group-title">UNESCO MGIEP</h3>
-      <div class="ds-design-gallery-grid ds-design-gallery-grid--dense">
-        <div class="ds-design-gallery-item">
-          {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep1.png" alt="UNESCO MGIEP infographic 1" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+      <div class="ds-design-carousel">
+        <button
+          class="ds-design-carousel-btn ds-design-carousel-btn--prev"
+          type="button"
+          aria-label="Scroll UNESCO MGIEP gallery left"
+          data-scroll-target="mgiep-carousel"
+          data-scroll-direction="prev"
+        >
+          &#8592;
+        </button>
+        <div class="ds-design-carousel-track" id="mgiep-carousel">
+          <div class="ds-design-gallery-item">
+            {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep1.png" alt="UNESCO MGIEP infographic 1" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+          </div>
+          <div class="ds-design-gallery-item">
+            {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep2.png" alt="UNESCO MGIEP infographic 2" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+          </div>
+          <div class="ds-design-gallery-item">
+            {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep3.png" alt="UNESCO MGIEP infographic 3" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+          </div>
+          <div class="ds-design-gallery-item">
+            {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep4.png" alt="UNESCO MGIEP infographic 4" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+          </div>
+          <div class="ds-design-gallery-item">
+            {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep5.png" alt="UNESCO MGIEP infographic 5" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+          </div>
+          <div class="ds-design-gallery-item">
+            {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep6.png" alt="UNESCO MGIEP infographic 6" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
+          </div>
         </div>
-        <div class="ds-design-gallery-item">
-          {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep2.png" alt="UNESCO MGIEP infographic 2" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
-        </div>
-        <div class="ds-design-gallery-item">
-          {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep3.png" alt="UNESCO MGIEP infographic 3" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
-        </div>
-        <div class="ds-design-gallery-item">
-          {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep4.png" alt="UNESCO MGIEP infographic 4" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
-        </div>
-        <div class="ds-design-gallery-item">
-          {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep5.png" alt="UNESCO MGIEP infographic 5" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
-        </div>
-        <div class="ds-design-gallery-item">
-          {% include figure.liquid path="/assets/img/infographics/unesco-mgiep/mgiep6.png" alt="UNESCO MGIEP infographic 6" title="Click to enlarge" class="img-fluid infographic-thumb rounded shadow-sm" cache_bust=true zoomable=true %}
-        </div>
+        <button
+          class="ds-design-carousel-btn ds-design-carousel-btn--next"
+          type="button"
+          aria-label="Scroll UNESCO MGIEP gallery right"
+          data-scroll-target="mgiep-carousel"
+          data-scroll-direction="next"
+        >
+          &#8594;
+        </button>
       </div>
     </section>
 
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".ds-design-carousel-btn").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var targetId = button.getAttribute("data-scroll-target");
+        var direction = button.getAttribute("data-scroll-direction");
+        var track = document.getElementById(targetId);
+        if (!track) return;
+        var delta = Math.max(track.clientWidth * 0.82, 280);
+        track.scrollBy({
+          left: direction === "prev" ? -delta : delta,
+          behavior: "smooth",
+        });
+      });
+    });
+  });
+</script>
