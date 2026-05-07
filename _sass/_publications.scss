@@ -343,7 +343,8 @@
 .post.page-publications-themed article .pub-entry-actions {
   grid-column: 2;
   grid-row: 3;
-  margin: 0.12rem 0 0;
+  margin: 0;
+  align-self: start;
   justify-self: end;
   display: flex;
   flex-wrap: wrap;
