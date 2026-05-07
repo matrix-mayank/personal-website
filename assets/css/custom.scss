@@ -1250,9 +1250,9 @@ html[data-theme='dark'] .post.page-awards article .award-tile .award-meta {
   gap: 1rem 1.1rem;
 }
 
-/* One-offs (UNICEF, UNV): full-width band but cap poster width so they stay legible */
+/* One-offs (UNICEF, UNV): centered cards; keep modest so they don’t dominate the band */
 .post.page-ds-design .ds-design-gallery-grid:not(.ds-design-gallery-grid--dense) {
-  max-width: min(960px, 100%);
+  max-width: min(520px, 94vw);
   margin-inline: auto;
 }
 
