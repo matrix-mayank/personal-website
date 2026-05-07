@@ -26,7 +26,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-### 1. What AI capabilities must we measure?
+### 1. What AI capabilities must we evaluate?
 
 I'm interested in identifying AI capabilities that matter, grounding them in literature from the human sciences, and breaking them down into constructs that are theoretically meaningful and machine measurable.
 
